@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 const links = [
   { href: '#portfolio', label: 'Portfolio' },
   { href: '#services', label: 'Services' },
-  { href: '#quote', label: 'Contact' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 export function Navbar() {
@@ -55,7 +55,7 @@ export function Navbar() {
         </ul>
 
         <a
-          href="#quote"
+          href="#contact"
           className="hidden rounded-full bg-gradient-to-r from-neon-blue to-neon-purple px-4 py-2 text-sm font-semibold text-dark-bg shadow-[0_0_24px_-4px_rgba(0,246,255,0.55)] transition hover:brightness-110 md:inline-flex"
         >
           Let&apos;s build
@@ -88,7 +88,7 @@ export function Navbar() {
             ))}
             <li>
               <a
-                href="#quote"
+                href="#contact"
                 className="mt-2 inline-flex rounded-full bg-gradient-to-r from-neon-blue to-neon-purple px-4 py-2.5 text-sm font-semibold text-dark-bg"
                 onClick={() => setOpen(false)}
               >
