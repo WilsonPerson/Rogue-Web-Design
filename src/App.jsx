@@ -55,6 +55,7 @@ export default function App() {
     const form = e.currentTarget
     const fd = new FormData(form)
     const username = String(fd.get('username') ?? '').trim()
+    const discord = String(fd.get('discord') ?? '').trim()
     const email = ''
     const message = String(fd.get('message') ?? '').trim()
 
@@ -63,7 +64,7 @@ export default function App() {
     setQuoteStatus('loading')
 
     try {
-      const result = await submitContact({ name: username, email, message })
+      const result = await submitContact({ name: username, email, discord, message })
       setQuoteMethod(result.method)
       setQuoteStatus('success')
       form.reset()
@@ -362,6 +363,22 @@ export default function App() {
                       disabled={quoteSending}
                       className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none ring-neon-blue/40 placeholder:text-slate-600 focus:ring-2 disabled:opacity-50"
                       placeholder="BuilderGuy123"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="quote-discord"
+                      className="text-xs font-medium uppercase tracking-wider text-slate-500"
+                    >
+                      Discord username
+                    </label>
+                    <input
+                      id="quote-discord"
+                      name="discord"
+                      autoComplete="username"
+                      disabled={quoteSending}
+                      className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none ring-neon-blue/40 placeholder:text-slate-600 focus:ring-2 disabled:opacity-50"
+                      placeholder="Rogan#1234"
                     />
                   </div>
                   <div>

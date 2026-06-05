@@ -13,7 +13,7 @@ export class ContactConfigError extends Error {
  * 3. FormSubmit — falls back to direct POST to roganshype@gmail.com if no backend is configured.
  * 4. Mailto — opens the visitor's mail app if direct submission cannot be completed.
  */
-export async function submitContact({ name, email, message }) {
+export async function submitContact({ name, email, discord, message }) {
   const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim()
   const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY?.trim()
   const contactEmail = import.meta.env.VITE_CONTACT_EMAIL?.trim() || 'roganshype@gmail.com'
@@ -28,6 +28,7 @@ export async function submitContact({ name, email, message }) {
       body: JSON.stringify({
         name,
         email,
+        discord,
         message,
         _subject: `Website quote — ${name}`,
         _replyto: email,
@@ -63,6 +64,7 @@ export async function submitContact({ name, email, message }) {
         subject: `Website quote — ${name}`,
         from_name: name,
         email,
+        discord,
         message,
       }),
     })
@@ -86,6 +88,7 @@ export async function submitContact({ name, email, message }) {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             name,
+            discord,
             message,
             _subject: `Roblox scripting inquiry — ${name}`,
             _replyto: email,
@@ -104,7 +107,7 @@ export async function submitContact({ name, email, message }) {
 
     const subject = encodeURIComponent(`Roblox scripting inquiry — ${name}`)
     const body = encodeURIComponent(
-      `Roblox username: ${name}\n\nProject details:\n${message}\n`,
+      `Roblox username: ${name}\nDiscord username: ${discord}\n\nProject details:\n${message}\n`,
     )
     window.location.href = `mailto:${encodeURIComponent(contactEmail)}?subject=${subject}&body=${body}`
     return { method: 'mailto' }
